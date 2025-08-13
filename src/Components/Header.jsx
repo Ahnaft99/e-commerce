@@ -1,31 +1,42 @@
-import React from 'react'
+import React, { useState } from 'react'
+import Container from '../Components/Container'
 import logo from '../assets/Logo.png'
-import Container from './Container'
+import { FaBars } from "react-icons/fa";
+import { RxCross1 } from "react-icons/rx";
 
 const Header = () => {
-  return (
-    <>
-    <div className='w-full bg-[#FFFFFF] items-center'>
-    <Container>
-        <div className='w-full flex py-4'>
-        <div className='w-1/2'>
-        <img src={logo} alt="" />
-        </div>
-        <div className='w-1/2'>
-        <ul className='flex gap-4'>
-            <li className='text-[14px] text-[#767676] hover:text-[#262626] hover:font-bold transition-transform duration-150 ease-in-out cursor-pointer'>Home</li>
-            <li className='text-[14px] text-[#767676] hover:text-[#262626] hover:font-bold transition-transform duration-150 ease-in-out cursor-pointer'>Shop</li>
-            <li className='text-[14px] text-[#767676] hover:text-[#262626] hover:font-bold transition-transform duration-150 ease-in-out cursor-pointer'>About</li>
-            <li className='text-[14px] text-[#767676] hover:text-[#262626] hover:font-bold transition-transform duration-150 ease-in-out cursor-pointer'>Contact</li>
-            <li className='text-[14px] text-[#767676] hover:text-[#262626] hover:font-bold transition-transform duration-150 ease-in-out cursor-pointer'>Journal</li>
-        </ul>
-        </div>
-        </div>
-    </Container>
-    </div>
+  let [menu, setMenu] = useState(false);
+    const handleMenu = () => {
+    setMenu(!menu);
+  }
   
-    </>
+
+  return (
+    <header className='py-3'>
+      <Container>
+        <div className='lg:flex items-center'>
+          <div className='w-2/12'>
+            <img src={logo} alt="" />
+          </div>
+          <div className='w-full  lg:w-10/12'>
+            <ul className={`lg:flex gap-6 justify-center duration-300 ease-in-out  text-center
+              ${menu == true ? "bg-[#262626] h-[0px] opacity-0 overflow-hidden" 
+              : "bg-[silver] h-[200px] opacity-100"} 
+              lg:bg-transparent lg:h-auto lg:opacity-100 lg:overflow-visible`}>
+              <li className='font-dm text-[16px] text-[#767676] hover:text-[#262626] duration-300 ease-in-out cursor-pointer'>Home</li>
+              <li className='font-dm text-[16px] text-[#767676] hover:text-[#262626] duration-300 ease-in-out cursor-pointer'>Shop</li>
+              <li className='font-dm text-[16px] text-[#767676] hover:text-[#262626] duration-300 ease-in-out cursor-pointer'>About</li>
+              <li className='font-dm text-[16px] text-[#767676] hover:text-[#262626] duration-300 ease-in-out cursor-pointer'>Contact</li>
+              <li className='font-dm text-[16px] text-[#767676] hover:text-[#262626] duration-300 ease-in-out cursor-pointer'>Journal</li>
+            </ul>
+          </div>
+          <div className='lg:hidden absolute top-[10px] right-2' onClick={handleMenu }>
+            {menu ? <FaBars /> : <RxCross1 />}
+          </div>
+        </div>
+      </Container>
+    </header>
   )
 }
 
-export default Header
+export default Header;
